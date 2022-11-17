@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/ec2-user/springboot-webservice
+    destination: /home/ec2-user/app/step1
     overwrite: yes
 
 permissions:
@@ -13,6 +13,6 @@ permissions:
 
 hooks:
   ApplicationStart:
-    - location: scripts/deploy.sh
+    - location: /home/ec2-user/app/step1/deploy.sh
       timeout: 60
       runas: ec2-user
