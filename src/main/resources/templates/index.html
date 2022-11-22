@@ -10,6 +10,7 @@
             <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
             <a sec:authorize="isAuthenticated()" href="/logout" class="btn btn-info active" role="button">Logout</a>
             <a sec:authorize="isAnonymous()" href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+            <a sec:authorize="isAnonymous()" href="/oauth2/authorization/kakao" class="btn btn-success active" role="button">Kakao Login</a>
         </div>
     </div>
     <br>

@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -32,11 +33,23 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
         System.out.println("getAttributes: " + oAuth2User.getAttributes());
 
         String provider = userRequest.getClientRegistration().getRegistrationId(); // google
+
+        System.out.println("provider : " + provider);
+
+        String name = oAuth2User.getAttribute("name");
         String email = oAuth2User.getAttribute("email");
 
+        if (provider.equals("kakao")) {
+            name = (String) ((Map<String, Object>)((Map<String, Object>)oAuth2User.getAttribute("kakao_account")).get("profile")).get("nickname");
+            email = (String) ((Map<String, Object>)oAuth2User.getAttribute("kakao_account")).get("email");
+        }
+
+        System.out.println("name : " + name);
+        System.out.println("email : " + email);
+
         User user = User.builder()
-                .name(oAuth2User.getAttribute("name"))
-                .email(oAuth2User.getAttribute("email"))
+                .name(name)
+                .email(email)
                 .picture(oAuth2User.getAttribute("picture"))
                 .role(Role.USER)
                 .provider(provider)
