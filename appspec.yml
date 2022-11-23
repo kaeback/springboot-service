@@ -18,7 +18,7 @@ hooks:
       runas : ec2-user
 
   ApplicationStart:
-    - location: scripts/deploy.sh
+    - location: scripts/start.sh # 엔진엑스와 연결되어 짔지 않은 port로 새 버전의 스프링 부트를 시작한다.
       timeout: 60
       runas: ec2-user
 
